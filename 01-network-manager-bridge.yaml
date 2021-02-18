@@ -1,0 +1,20 @@
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  renderer: NetworkManager
+
+  ethernets:
+    enp4s0:
+      dhcp4: no
+      dhcp6: no
+
+  # use br0.rules for udev
+  bridges:
+    br0:
+      macaddress: f0:f0:f0:f0:f0:f0
+      interfaces: [enp4s0]
+      dhcp4: true
+      dhcp6: no
+      parameters:
+        stp: false
+        forward-delay: 0

@@ -1,0 +1,14 @@
+curl -k -u none:none https://10.10.10.10/redfish/v1/Chassis/1 -s
+-L|jq '.["Status"]["Health"]'
+
+# curl -k -u none:none https://10.10.10.10/redfish/v1/Chassis/1 -s
+-L|jq '.["Status"]["HealthRollup"]'
+
+curl -k -u none:none https://10.10.10.10/redfish/v1/Systems/1 -s
+-L|jq '.["Status"]["Health"]'
+
+# curl -k -u none:none https://10.10.10.10/redfish/v1/Systems/1 -s
+-L|jq '.["MemorySummary"]["Status"]["Health"]'
+
+# curl -k -u none:none https://10.10.10.10/redfish/v1/Systems/1 -s
+-L|jq '.["ProcessorSummary"]["Status"]["Health"]'

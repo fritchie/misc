@@ -1,0 +1,1 @@
+ACTION==“add|change”, SUBSYSTEM==“net”, KERNEL==“*”, DRIVERS==“mlx5_core”, RUN+=“/sbin/ethtool -G %k rx 8192 tx 8192”

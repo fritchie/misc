@@ -1,0 +1,6 @@
+#/bin/bash
+export ETCDCTL_API=3
+etcdctl --endpoints=https://10.0.0.101:2379 \
+	--cacert=/home/fritchie/tls/ca.pem  \
+	--cert=/home/fritchie/tls/member-k8m01.pem \
+	--key=/home/fritchie/tls/member-k8m01-key.pem $@
