@@ -4,25 +4,25 @@
 # igb modprobe
 # options igb IntMode=2 RSS=2
 
-## Enable RSS 2 queues
+## enable rss 2 queues
 # ethtool -K enp4s0 rx-hashing on
 # ethtool -X enp4s0 equal 2
 #
-## Enable RPS
+## enable rps
 # echo 000000FF > /sys/class/net/enp4s0/queues/rx-0/rps_cpus
 # echo 0000FF00 > /sys/class/net/enp4s0/queues/rx-1/rps_cpus
 
-## Enable RFS
+## enable rfs
 # sudo sysctl -w net.core.rps_sock_flow_entries=32768
 # echo 16384 > /sys/class/net/enp4s0/queues/rx-0/rps_flow_cnt
 # echo 16384 > /sys/class/net/enp4s0/queues/rx-1/rps_flow_cnt
 # ethtool -N enp4s0 rx-flow-hash tcp4 sdfn
 # ethtool -N enp4s0 rx-flow-hash udp4 sdfn
 
-## Enable Ntuple-filters
+## enable ntuple-filters
 # ethtool -K enp4s0 ntuple on
 
-## Enable XPS
+## enable xps
 # echo 000000FF > /sys/class/net/enp4s0/queues/tx-0/xps_cpus
 # echo 0000FF00 > /sys/class/net/enp4s0/queues/tx-1/xps_cpus
 
