@@ -1,4 +1,6 @@
 #!/bin/bash
+# intel I211
+# https://github.com/pcengines/apu2-documentation/issues/190
 # igb modprobe
 # options igb IntMode=2 RSS=2
 
