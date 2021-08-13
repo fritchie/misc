@@ -9,8 +9,8 @@
 # ethtool -X enp4s0 equal 2
 #
 ## enable rps
-# echo 000000FF > /sys/class/net/enp4s0/queues/rx-0/rps_cpus
-# echo 0000FF00 > /sys/class/net/enp4s0/queues/rx-1/rps_cpus
+# echo FFFFFFFF > /sys/class/net/enp4s0/queues/rx-0/rps_cpus
+# echo FFFFFFFF > /sys/class/net/enp4s0/queues/rx-1/rps_cpus
 
 ## enable rfs
 # sudo sysctl -w net.core.rps_sock_flow_entries=32768
@@ -23,8 +23,8 @@
 # ethtool -K enp4s0 ntuple on
 
 ## enable xps
-# echo 000000FF > /sys/class/net/enp4s0/queues/tx-0/xps_cpus
-# echo 0000FF00 > /sys/class/net/enp4s0/queues/tx-1/xps_cpus
+# echo FFFFFFFF > /sys/class/net/enp4s0/queues/tx-0/xps_cpus
+# echo FFFFFFFF > /sys/class/net/enp4s0/queues/tx-1/xps_cpus
 
 DEVICE="enp4s0"
 
