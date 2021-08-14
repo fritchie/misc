@@ -26,6 +26,12 @@
 # echo 0000FFFF > /sys/class/net/enp4s0/queues/tx-0/xps_cpus
 # echo 0000FFFF > /sys/class/net/enp4s0/queues/tx-1/xps_cpus
 
+## Set IRQ affinity
+# readarray -t IRQS < <(egrep  "enp4s0-[r|t]x-[0-9]" /proc/interrupts | awk -F: '{sub(/^[ ]+/, ""); print $1}')
+# for IRQ in ${IRQS[@]}; do
+#    echo 0000FFFF > /proc/irq/"$IRQ"/smp_affinity
+# done
+
 DEVICE="enp4s0"
 
 echo RSS
@@ -90,9 +96,3 @@ ethtool -k "$DEVICE" | grep ntuple-filters
 echo STATS
 echo ==========
 ethtool -S enp4s0 | grep queue | grep -E 'bytes|packets' | sort | awk '{$1=$1;print}'
-
-# Set IRQ affinity
-readarray -t IRQS < <(egrep  "enp4s0-[r|t]x-[0-9]" /proc/interrupts | awk -F: '{sub(/^[ ]+/, ""); print $1}')
-for IRQ in ${IRQS[@]}; do
-    echo 0000FFFF > /proc/irq/"$IRQ"/smp_affinity
-done
