@@ -2,7 +2,7 @@
 # intel I211
 # https://github.com/pcengines/apu2-documentation/issues/190
 # igb modprobe
-# options igb IntMode=2 RSS=2
+# options igb IntMode=2 QueuePairs=0 RSS=2
 
 ## enable rss 2 queues
 # ethtool -K enp4s0 rx-hashing on
