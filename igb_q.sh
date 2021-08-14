@@ -27,8 +27,8 @@
 # echo 0000FFFF > /sys/class/net/enp4s0/queues/tx-1/xps_cpus
 
 ## Set IRQ affinity
-# IRQS=$(egrep  "enp4s0-[r|t]x-[0-9]" /proc/interrupts | awk -F: '{sub(/^[ ]+/, ""); print $1}')
-# for IRQ in "$IRQS"; do
+# IRQS=($(egrep  "enp4s0-[r|t]x-[0-9]" /proc/interrupts | awk -F: '{sub(/^[ ]+/, ""); print $1}'))
+# for IRQ in "${IRQS[@]}"; do
 #    echo 0000FFFF > /proc/irq/"$IRQ"/smp_affinity
 # done
 
@@ -50,8 +50,8 @@ else
 fi
 echo
 
-RX_QS=$(find /sys/class/net/"$DEVICE"/queues -type d -name "rx-*" -printf "%f\n" | sort)
-for Q in "$RX_QS"; do
+RX_QS=($(find /sys/class/net/"$DEVICE"/queues -type d -name "rx-*" -printf "%f\n" | sort))
+for Q in "${RX_QS[@]}"; do
     echo "queue: $Q"
     if [[ -f /sys/class/net/"$DEVICE"/queues/"$Q"/rps_cpus ]]; then
         echo "rps_cpus: $(cat /sys/class/net/"$DEVICE"/queues/"$Q"/rps_cpus)"
@@ -68,8 +68,8 @@ done
 
 echo XPS
 echo ==========
-TX_QS=$(find /sys/class/net/"$DEVICE"/queues -type d -name "tx-*" -printf "%f\n" | sort)
-for Q in "$TX_QS"; do
+TX_QS=($(find /sys/class/net/"$DEVICE"/queues -type d -name "tx-*" -printf "%f\n" | sort))
+for Q in "${TX_QS[@]}"; do
     echo "queue: $Q"
     if [[ -f /sys/class/net/"$DEVICE"/queues/"$Q"/xps_cpus ]]; then
         echo "xps_cpus: $(cat /sys/class/net/"$DEVICE"/queues/"$Q"/xps_cpus)"
