@@ -9,8 +9,8 @@
 # ethtool -X enp4s0 equal 2
 #
 ## enable rps
-# echo 0000FFFF > /sys/class/net/enp4s0/queues/rx-0/rps_cpus
-# echo 0000FFFF > /sys/class/net/enp4s0/queues/rx-1/rps_cpus
+# echo FFFFFFFF > /sys/class/net/enp4s0/queues/rx-0/rps_cpus
+# echo FFFFFFFF > /sys/class/net/enp4s0/queues/rx-1/rps_cpus
 
 ## enable rfs
 # sudo sysctl -w net.core.rps_sock_flow_entries=32768
@@ -23,13 +23,13 @@
 # ethtool -K enp4s0 ntuple on
 
 ## enable xps
-# echo 0000FFFF > /sys/class/net/enp4s0/queues/tx-0/xps_cpus
-# echo 0000FFFF > /sys/class/net/enp4s0/queues/tx-1/xps_cpus
+# echo FFFFFFFF > /sys/class/net/enp4s0/queues/tx-0/xps_cpus
+# echo FFFFFFFF > /sys/class/net/enp4s0/queues/tx-1/xps_cpus
 
 ## Set IRQ affinity
 # readarray -t IRQS < <(egrep  "enp4s0-[r|t]x-[0-9]" /proc/interrupts | awk -F: '{sub(/^[ ]+/, ""); print $1}')
 # for IRQ in ${IRQS[@]}; do
-#    echo 0000FFFF > /proc/irq/"$IRQ"/smp_affinity
+#    echo FFFFFFFF > /proc/irq/"$IRQ"/smp_affinity
 # done
 
 DEVICE="enp4s0"
