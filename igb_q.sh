@@ -90,3 +90,9 @@ ethtool -k "$DEVICE" | grep ntuple-filters
 echo STATS
 echo ==========
 ethtool -S enp4s0 | grep queue | grep -E 'bytes|packets' | sort | awk '{$1=$1;print}'
+
+# Set IRQ affinity
+readarray -t IRQS < <(egrep  "enp4s0-[r|t]x-[0-9]" /proc/interrupts | awk -F: '{sub(/^[ ]+/, ""); print $1}')
+for IRQ in ${IRQS[@]}; do
+    echo FFFFFFFF > /proc/irq/"$IRQ"/smp_affinity
+done
