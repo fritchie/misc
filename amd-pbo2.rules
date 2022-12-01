@@ -1,0 +1,1 @@
+KERNEL=="cpu", SUBSYSTEM=="event_source", ACTION=="add", RUN+="/bin/sh -c 'echo 1 > /sys/devices/system/cpu/cpufreq/boost'"
